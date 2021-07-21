@@ -26,4 +26,13 @@ class DetectionController extends Controller
             'image' => $request->image,
         ]);
     }
+
+    public function store_from_mqtt($data)
+    {
+        
+        $detection = Detection::create([
+            'camera_id' => $data->camera_id,
+            'plate_number' => $data->plate_number,
+        ]);
+    }
 }
