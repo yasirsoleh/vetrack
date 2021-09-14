@@ -5,6 +5,7 @@ namespace App\Console\Commands;
 use Illuminate\Console\Command;
 use Salman\Mqtt\Facades\Mqtt;
 use App\Http\Controllers\DetectionController;
+use App\Models\Camera;
 
 class MqttStore extends Command
 {
@@ -39,9 +40,14 @@ class MqttStore extends Command
      */
     public function handle()
     {
-        //$camera = Camera::pluck('mqtt_topic');
-        //$this->subscribeToTopic($camera);
-        $this->subscribeToTopic(['werk','detection']);
+        $mqtt_topic = Camera::pluck('mqtt_topic');
+        if ($mqtt_topic->isEmpty()) {
+            $this->subscribeToTopic("detection");
+        }elseif ($mqtt_topic->count()==1) {
+            $this->subscribeToTopic($mqtt_topic->pop());
+        }else{
+            $this->subscribeToTopic($mqtt_topic->toArray());
+        }
     }
 
     public function subscribeToTopic($topic)
@@ -52,7 +58,7 @@ class MqttStore extends Command
             echo "\t$msg\n\n";
             $data = json_decode($msg);
             $detection = new DetectionController();
-            $detection->store_from_mqtt($data);
+            $detection->store_from_mqtt($topic, $data);
         });
     }
 }

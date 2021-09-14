@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Camera;
 use Illuminate\Http\Request;
 use App\Models\Detection;
 
@@ -27,11 +28,11 @@ class DetectionController extends Controller
         ]);
     }
 
-    public function store_from_mqtt($data)
+    public function store_from_mqtt($mqtt_topic, $data)
     {
-        
+        $camera = Camera::firstWhere('mqtt_topic', $mqtt_topic);
         $detection = Detection::create([
-            'camera_id' => $data->camera_id,
+            'camera_id' => $camera->id,
             'plate_number' => $data->plate_number,
         ]);
     }

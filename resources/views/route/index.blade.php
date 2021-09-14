@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Detections') }}
+            {{ __('Route') }}
         </h2>
     </x-slot>
 
@@ -13,8 +13,6 @@
                         <table class="table w-full">
                             <thead>
                                 <tr>
-                                    <th>Id</th> 
-                                    <th>Camera Name</th> 
                                     <th>Plate Number</th>
                                     <th>Action</th>
                                 </tr>
@@ -22,10 +20,8 @@
                             <tbody>
                                 @foreach ($detections as $detection)
                                 <tr>
-                                    <th>{{ $detection->id }}</th> 
-                                    <td>{{ $detection->camera->name }}</td> 
                                     <td>{{ $detection->plate_number }}</td>
-                                    <td></td>
+                                    <td><a class="btn btn-sm" href="{{ route('route.show', ['plate_number' => $detection->plate_number]) }}">View</a></td>
                                 </tr>
                                 @endforeach
                             </tbody>

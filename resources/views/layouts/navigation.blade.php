@@ -22,6 +22,18 @@
                         {{ __('Detection') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('camera.index')" :active="request()->routeIs('camera')">
+                        {{ __('Camera') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('route.index')" :active="request()->routeIs('route')">
+                        {{ __('Route') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->

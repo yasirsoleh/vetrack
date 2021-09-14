@@ -13,6 +13,8 @@ class Camera extends Model
         'name',
         'mqtt_topic',
         'traffic_direction',
+        'latitude',
+        'longitude',
     ];
 
     public function detections()
