@@ -15,8 +15,8 @@ class CreateDetectionsTable extends Migration
     {
         Schema::create('detections', function (Blueprint $table) {
             $table->id();
-            //$table->foreignId('camera_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->string('camera_id');
+            $table->foreignId('camera_id')->constrained()->onUpdate('cascade')->onDelete('cascade');
+            //$table->string('camera_id');
             $table->string('plate_number');
             $table->binary('image')->nullable();
             $table->timestamps();

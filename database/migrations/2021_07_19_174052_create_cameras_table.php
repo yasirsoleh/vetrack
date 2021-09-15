@@ -18,6 +18,8 @@ class CreateCamerasTable extends Migration
             $table->string('name');
             $table->string('mqtt_topic');
             $table->enum('traffic_direction',['inbound','outbound']);
+            $table->string('latitude');
+            $table->string('longitude');
             $table->timestamps();
         });
     }
